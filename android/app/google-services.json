@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "352839780808",
+    "project_id": "etanaoroko-app",
+    "storage_bucket": "etanaoroko-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352839780808:android:f824d93aa14370fcab18fd",
+        "android_client_info": {
+          "package_name": "com.hoop.etanaorokoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352839780808-cb0onki2oeo1idl70p0ltsf1ddo7ull9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYfMwrK3zQFtnpci_I0SqCb2qDeyYUjzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352839780808-cb0onki2oeo1idl70p0ltsf1ddo7ull9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

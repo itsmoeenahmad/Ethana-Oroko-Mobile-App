@@ -1,0 +1,91 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Users ---
+    match /users/{uid} {
+      // Anyone authenticated can read any user profile
+      allow read: if request.auth != null;
+
+      // Users can only create their own document with required fields
+      allow create: if request.auth != null
+                    && request.auth.uid == uid
+                    && request.resource.data.keys().hasAll(['uid', 'name', 'email', 'createdAt'])
+                    && request.resource.data.uid == uid
+                    && request.resource.data.name is string
+                    && request.resource.data.email is string;
+
+      // Users can only update their own document
+      allow update: if request.auth != null
+                    && request.auth.uid == uid;
+
+      // No user deletion in MVP
+      allow delete: if false;
+    }
+
+    // --- Posts ---
+    match /posts/{postId} {
+      // Any authenticated user can read posts
+      allow read: if request.auth != null;
+
+      // Authenticated users can create posts only for themselves with required fields
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.keys().hasAll(['id', 'userId', 'userName', 'content', 'createdAt', 'likesCount', 'commentsCount'])
+                    && request.resource.data.content is string
+                    && request.resource.data.userName is string;
+
+      // Post author can update anything on their post.
+      // Any authenticated user can update ONLY likesCount/commentsCount
+      // (needed for like/unlike and add comment batch writes).
+      allow update: if request.auth != null
+                    && (resource.data.userId == request.auth.uid
+                        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount', 'commentsCount']));
+
+      // Only the post author can delete
+      allow delete: if request.auth != null
+                    && resource.data.userId == request.auth.uid;
+
+      // --- Likes sub-collection ---
+      match /likes/{likeId} {
+        allow read: if request.auth != null;
+
+        // Users can only create their own like (likeId must equal their uid)
+        allow create: if request.auth != null
+                      && likeId == request.auth.uid;
+
+        // Users can only delete their own like
+        allow delete: if request.auth != null
+                      && likeId == request.auth.uid;
+
+        // No updating likes
+        allow update: if false;
+      }
+
+      // --- Comments sub-collection ---
+      match /comments/{commentId} {
+        allow read: if request.auth != null;
+
+        // Authenticated users can create comments for themselves
+        allow create: if request.auth != null
+                      && request.resource.data.userId == request.auth.uid
+                      && request.resource.data.keys().hasAll(['id', 'userId', 'userName', 'content', 'createdAt'])
+                      && request.resource.data.content is string;
+
+        // Only comment author can update
+        allow update: if request.auth != null
+                      && resource.data.userId == request.auth.uid;
+
+        // Only comment author can delete
+        allow delete: if request.auth != null
+                      && resource.data.userId == request.auth.uid;
+      }
+    }
+
+    // Deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

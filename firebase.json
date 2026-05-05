@@ -1,0 +1,33 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "etanaoroko-app",
+          "appId": "1:352839780808:android:f824d93aa14370fcab18fd",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "etanaoroko-app",
+          "appId": "1:352839780808:ios:d9d36125e21f9ef5ab18fd",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "etanaoroko-app",
+          "configurations": {
+            "android": "1:352839780808:android:f824d93aa14370fcab18fd",
+            "ios": "1:352839780808:ios:d9d36125e21f9ef5ab18fd"
+          }
+        }
+      }
+    }
+  }
+}
