@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDYfMwrK3zQFtnpci_I0SqCb2qDeyYUjzw',
+    apiKey: 'api-key',
     appId: '1:352839780808:android:f824d93aa14370fcab18fd',
     messagingSenderId: '352839780808',
     projectId: 'etanaoroko-app',
@@ -58,12 +58,13 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDVZ--7fJQuRZShKkSLsrpKtOju8zB62pM',
+    apiKey: 'api-key',
     appId: '1:352839780808:ios:d9d36125e21f9ef5ab18fd',
     messagingSenderId: '352839780808',
     projectId: 'etanaoroko-app',
     storageBucket: 'etanaoroko-app.firebasestorage.app',
-    iosClientId: '352839780808-n30l566jaj7mcfrbf9ek912o1i0j918f.apps.googleusercontent.com',
+    iosClientId:
+        '352839780808-n30l566jaj7mcfrbf9ek912o1i0j918f.apps.googleusercontent.com',
     iosBundleId: 'com.hoop.etanaorokoapp',
   );
 }
